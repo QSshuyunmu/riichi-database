@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 本地数据（不入库）
+*.parquet
+*.db
+*.sqlite
+*.zip
+*.gz
+*.bin
+
+# 本地环境
+.env
+.opencode/
+.kiro/
+
+# 临时
+*.tmp
+*.log
