@@ -18,15 +18,6 @@
 | **This project** | Data foundation layer: full pipeline + validation system from HTML paifu to **trusted event stream** |
 | **Core belief** | Quality of LLM answers **≤ quality of data** — untrustworthy data poisons everything above |
 
-```
-+--------------------------------------------------------------+
-|  Future layer: LLM natural-language query (NL → trusted stats)|
-+--------------------------------------------------------------+
-|  This layer: trusted event-stream data foundation             |
-|  HTML paifu → parse → track → multi-level validate → pure admission → parquet |
-+--------------------------------------------------------------+
-```
-
 ---
 
 ## Background & Motivation
@@ -39,17 +30,29 @@ This project builds that **trusted data layer**. The core contribution is the **
 
 ## Methodology: From HTML to Trusted Database (Core)
 
-```mermaid
-graph TD
-    A[Tenhou HTML/XML paifu<br/>354K games raw] --> B[Parse layer<br/>pipeline/tenhou_to_mjai.py]
-    B --> C[Event-track layer<br/>pipeline/etl_v3.py]
-    C --> D[Validation gate<br/>verify_gate.py L0-L3]
-    D --> E[Rule self-checks<br/>genbutsu=0 / counterfactual]
-    D --> F[Admission layer<br/>pure-kyoku (ADR-005)]
-    E --> F
-    F --> G[(v3_200k_v2.parquet<br/>trusted event stream)]
-    G --> H[Query families analysis/<br/>results results/]
-    G --> I[Future: LLM NL query layer]
+```
+┌────────────────────────────────────────────────────────────┐
+│  Future layer: LLM natural-language query (NL → trusted)   │
+└──────────────────────────────┬─────────────────────────────┘
+                               ▲
+┌──────────────────────────────┴─────────────────────────────┐
+│  This layer: trusted event-stream data foundation           │
+│                                                             │
+│  Tenhou HTML/XML paifu (354K games)                         │
+│      │  ① Parse layer   pipeline/tenhou_to_mjai.py          │
+│      ▼                                                      │
+│  MJAI event stream                                          │
+│      │  ② Track layer   pipeline/etl_v3.py                  │
+│      ▼                                                      │
+│  Raw event stream                                           │
+│      │  ③ Validation gate   verify_gate.py L0-L3            │
+│      ├── Rule self-checks (genbutsu=0 / counterfactual) ④   │
+│      ▼                                                      │
+│  v3_200k_v2.parquet (2.05M kyoku)  ← ⑤ Admission (ADR-005)  │
+│      │                                                      │
+│      ├── Query families analysis/ → results/                │
+│      └── (future) LLM NL query layer                        │
+└────────────────────────────────────────────────────────────┘
 ```
 
 ### 1. Parse Layer (`pipeline/tenhou_to_mjai.py`)
