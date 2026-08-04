@@ -30,29 +30,26 @@ This project builds that **trusted data layer**. The core contribution is the **
 
 ## Methodology: From HTML to Trusted Database (Core)
 
-```
-┌────────────────────────────────────────────────────────────┐
-│  Future layer: LLM natural-language query (NL → trusted)   │
-└──────────────────────────────┬─────────────────────────────┘
-                               ▲
-┌──────────────────────────────┴─────────────────────────────┐
-│  This layer: trusted event-stream data foundation           │
-│                                                             │
-│  Tenhou HTML/XML paifu (354K games)                         │
-│      │  ① Parse layer   pipeline/tenhou_to_mjai.py          │
-│      ▼                                                      │
-│  MJAI event stream                                          │
-│      │  ② Track layer   pipeline/etl_v3.py                  │
-│      ▼                                                      │
-│  Raw event stream                                           │
-│      │  ③ Validation gate   verify_gate.py L0-L3            │
-│      ├── Rule self-checks (genbutsu=0 / counterfactual) ④   │
-│      ▼                                                      │
-│  v3_200k_v2.parquet (2.05M kyoku)  ← ⑤ Admission (ADR-005)  │
-│      │                                                      │
-│      ├── Query families analysis/ → results/                │
-│      └── (future) LLM NL query layer                        │
-└────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    A["Tenhou HTML/XML paifu"]
+    B["Parse layer: tenhou_to_mjai.py"]
+    C["Event-track layer: etl_v3.py"]
+    D["Validation gate: verify_gate L0-L3"]
+    E["Rule self-check: genbutsu=0"]
+    F["Pure-kyoku admission: ADR-005"]
+    G["v3_200k_v2.parquet trusted event stream"]
+    H["Query families analysis -> results"]
+    I["Future: LLM NL query layer"]
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    D --> F
+    E --> F
+    F --> G
+    G --> H
+    G --> I
 ```
 
 ### 1. Parse Layer (`pipeline/tenhou_to_mjai.py`)
