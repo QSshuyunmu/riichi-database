@@ -218,6 +218,12 @@ python analysis/gate/run_guarded.py analysis/queries/b2_queries.py
 - nodocchi.moe Phoenix DB statistical baseline
 - mjlog authoritative reference: kobalab/tenhou-log
 
+## Contributing
+
+- Report bugs / suggest features: see [Issue templates](.github/ISSUE_TEMPLATE/bug_report.md)
+- Submit code: see [CONTRIBUTING.md](CONTRIBUTING.md) (run validation gates after changes; follow statistical conventions)
+- CI: syntax checks + data-file validation run automatically
+
 ## License
 
 MIT (see [LICENSE](LICENSE)). Data belongs to Tenhou.

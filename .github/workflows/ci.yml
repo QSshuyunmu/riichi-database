@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  lint-syntax:
+    name: Python syntax check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: pip install polars psutil
+
+      - name: Compile all Python files (syntax)
+        run: |
+          python -m compileall -q pipeline analysis
+          echo "All Python files compile OK"
+
+  check-data:
+    name: Data file sanity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify JSON data files parse
+        run: |
+          python -c "
+          import json
+          for f in ['data/baseline_stats.json', 'data/golden_set.json']:
+              j = json.load(open(f, encoding='utf-8'))
+              print(f'{f}: OK ({len(j)} keys)')
+          "

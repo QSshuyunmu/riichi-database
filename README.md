@@ -234,6 +234,12 @@ python analysis/gate/run_guarded.py analysis/queries/b2_queries.py
 - nodocchi.moe Phoenix DB 统计基准（天凤凤凰卓玩家统计）
 - mjlog 权威解析参考：kobalab/tenhou-log
 
+## 参与贡献
+
+- 报告问题 / 建议功能：见 [Issue 模板](.github/ISSUE_TEMPLATE/bug_report.md)
+- 提交代码：见 [CONTRIBUTING.md](CONTRIBUTING.md)（修改后必跑门禁，遵循统计口径规范）
+- CI：语法检查 + 数据文件校验自动运行
+
 ## License
 
 MIT（见 [LICENSE](LICENSE)）。数据归天凤所有。

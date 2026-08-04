@@ -181,6 +181,12 @@ python analysis/gate/run_guarded.py analysis/queries/b2_queries.py
 - nodocchi.moe Phoenix DB 統計ベースライン
 - mjlog 権威リファレンス：kobalab/tenhou-log
 
+## コントリビューション
+
+- バグ報告 / 機能提案：[Issue テンプレート](.github/ISSUE_TEMPLATE/bug_report.md)
+- コード提出：[CONTRIBUTING.md](CONTRIBUTING.md)（変更後は検証ゲートを実行、統計口径に従う）
+- CI：構文チェック + データファイル検証が自動実行
+
 ## ライセンス
 
 MIT（[LICENSE](LICENSE) 参照）。データは天鳳に帰属。
