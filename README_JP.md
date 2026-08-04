@@ -36,7 +36,7 @@ graph TD
     B["解析層: tenhou_to_mjai.py"]
     C["イベント追跡層: etl_v3.py"]
     D["検証ゲート: verify_gate L0-L3"]
-    E["ルール自己検証: 現物=0"]
+    E["ルール自己検証: 現物-0"]
     F["純粋局准入: ADR-005"]
     G["v3_200k_v2.parquet 信頼できるイベントストリーム"]
     H["クエリ群 analysis -> results"]

@@ -36,7 +36,7 @@ graph TD
     B["解析层: tenhou_to_mjai.py"]
     C["事件流追踪层: etl_v3.py"]
     D["验证门禁: verify_gate L0-L3"]
-    E["规则自检: 现物=0"]
+    E["规则自检: 现物-0"]
     F["纯净局准入: ADR-005"]
     G["v3_200k_v2.parquet 可信事件流"]
     H["查询族 analysis -> results"]

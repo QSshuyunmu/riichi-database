@@ -36,7 +36,7 @@ graph TD
     B["Parse layer: tenhou_to_mjai.py"]
     C["Event-track layer: etl_v3.py"]
     D["Validation gate: verify_gate L0-L3"]
-    E["Rule self-check: genbutsu=0"]
+    E["Rule self-check: genbutsu-0"]
     F["Pure-kyoku admission: ADR-005"]
     G["v3_200k_v2.parquet trusted event stream"]
     H["Query families analysis -> results"]
